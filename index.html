@@ -9,6 +9,9 @@
 <body>
     <h1 id="serverTime">server time</h1>
 
+    <input id="name" type="text" placeholder="Please inter your name">
+    <button onclick="send()" id="send_id"> Send name to server></button>
+
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -22,6 +25,23 @@
             document.getElementById('serverTime').innerHTML = data
         })
     </script>
+
+
+    <script>
+        // let socket = io();
+
+        function send() {
+            let name = document.getElementById('name').value;
+            console.log(name);
+
+            socket.send(name)
+
+        }
+    </script>
+
+
+
+
 
 </body>
 

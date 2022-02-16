@@ -34,6 +34,11 @@ io.on('connection', function(socket) {
     }, 5000)
 
 
+    socket.on('message', function(data) {
+        console.log("message recive------" + data)
+    })
+
+
 
     socket.on("disconnect", function() {
         console.log("User disconnected")
