@@ -17,12 +17,20 @@ io.on('connection', function(socket) {
     //     socket.send("I am message from server.....")
     // }, 5000)
 
+    // setInterval(function() {
+    //     let d = new Date();
+    //     let t = d.getTime();
+
+    //     console.log("send message to client")
+    //     socket.send("Current server time: " + t)
+    // }, 5000)
+
     setInterval(function() {
         let d = new Date();
         let t = d.getTime();
 
-        console.log("send message to client")
-        socket.send("Current server time: " + t)
+        console.log("send custom event to client")
+        socket.emit("myServerEvent", "Current server time: " + t)
     }, 5000)
 
 
