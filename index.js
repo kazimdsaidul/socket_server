@@ -12,10 +12,20 @@ const io = new Server(expressServer);
 io.on('connection', function(socket) {
     console.log("New User Connected!")
 
-    setTimeout(function() {
+    // setTimeout(function() {
+    //     console.log("send message to client")
+    //     socket.send("I am message from server.....")
+    // }, 5000)
+
+    setInterval(function() {
+        let d = new Date();
+        let t = d.getTime();
+
         console.log("send message to client")
-        socket.send("I am message from server.....")
+        socket.send("Current server time: " + t)
     }, 5000)
+
+
 
     socket.on("disconnect", function() {
         console.log("User disconnected")
