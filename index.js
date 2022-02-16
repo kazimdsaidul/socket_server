@@ -8,6 +8,10 @@ const { Server } = require('socket.io');
 
 const io = new Server(expressServer);
 
+let sellGroup = io.of("/sell_group")
+
+let buyGroup = io.of("/buy_group")
+
 // handle all event all to server
 io.on('connection', function(socket) {
     console.log("New User Connected!")
@@ -34,6 +38,9 @@ io.on('connection', function(socket) {
     }, 5000)
 
 
+
+
+
     socket.on('message', function(data) {
         console.log("message recive------" + data)
     })
@@ -45,6 +52,36 @@ io.on('connection', function(socket) {
     })
 
 })
+
+sellGroup.on('connection', function(socket) {
+    console.log("New User Connected! --- sell group---")
+
+    setInterval(function() {
+        let total = Math.random()
+        console.log("Sell group people send")
+        sellGroup.emit("totalSellEvent", "Total Sell: " + total)
+    }, 2000)
+
+    socket.on("disconnect", function() {
+        console.log("User disconnected--- sell group---")
+    })
+})
+
+buyGroup.on('connection', function(socket) {
+    console.log("New User Connected! --- buy group---")
+
+    setInterval(function() {
+        let total = Math.random()
+        console.log("buy send")
+        buyGroup.emit("totalBuyEvent", "Total buy: " + total)
+    }, 3000)
+
+    socket.on("disconnect", function() {
+        console.log("User disconnected--- buy group---")
+    })
+})
+
+
 
 
 //server redrirect to index.html file 

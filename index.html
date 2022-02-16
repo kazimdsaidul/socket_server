@@ -7,7 +7,9 @@
 </head>
 
 <body>
-    <h1 id="serverTime">server time</h1>
+    <h1 id="serverTime">Start after 5S</h1>
+    <h1 id="totalSell">Total</h1>
+    <h1 id="totalBuy">Total</h1>
 
     <input id="name" type="text" placeholder="Please inter your name">
     <button onclick="send()" id="send_id"> Send name to server></button>
@@ -37,6 +39,23 @@
             socket.send(name)
 
         }
+    </script>
+
+
+    <script>
+        let socketSellGroup = io("/sell_group");
+
+        socketSellGroup.on('totalSellEvent', function(data) {
+            document.getElementById('totalSell').innerHTML = ""
+            document.getElementById('totalSell').innerHTML = data
+        })
+
+        let socketBuyGroup = io("/buy_group");
+
+        socketBuyGroup.on('totalBuyEvent', function(data) {
+            document.getElementById('totalBuy').innerHTML = ""
+            document.getElementById('totalBuy').innerHTML = data
+        })
     </script>
 
 
